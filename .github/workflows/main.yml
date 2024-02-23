@@ -24,7 +24,10 @@ jobs:
         with:
           node-version: 18
       - name: Build library
-        run: make
+        run: |
+          emcc --version;
+          cmake --version;
+          make;
       - uses: actions/upload-artifact@v4
         with:
           name: plugins
