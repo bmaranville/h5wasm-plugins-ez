@@ -5,6 +5,7 @@ PLUGINS = $(patsubst %, plugins/libH5Z%.so, $(HDF5_VERSIONS))
 
 plugins: 
 	emcmake cmake -DCMAKE_INSTALL_PREFIX=$(INSTALL_PREFIX) -S . -B build;
+        cmake --build build --target libzstd_static;
 	cmake --build build;
 	cmake --install build;
 
