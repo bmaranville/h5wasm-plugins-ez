@@ -56,9 +56,9 @@ jobs:
             // delete existing release assets (if needed) and upload new ones:
             const globber = await glob.create("plugins/*", {followSymbolicLinks: false});
             const full_paths = await globber.glob();
-            const to_update = full_paths.map((f) => path.basename(f));
-            console.log({to_update});
-            for (let fn of to_update) {
+            console.log({full_paths});
+            for (let p of full_paths) {
+              const fn = path.basename(p);
               let asset_id = (sid_release.data.assets.find((a) => (a.name == fn)) ?? {}).id;
               if (asset_id) {
                 await github.rest.repos.deleteReleaseAsset({
@@ -72,6 +72,6 @@ jobs:
                 repo,
                 release_id: sid_release.data.id,
                 name: fn,
-                data: await fs.readFileSync(fn)
+                data: await fs.readFileSync(p)
               });
             }
