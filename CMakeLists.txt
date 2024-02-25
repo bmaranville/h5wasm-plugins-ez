@@ -75,9 +75,6 @@ message(STATUS "ZLIB_DIR: ${ZLIB_DIR}")
 # the SZF library uses pkg_search_module to find zstd... with older pkg-config
 # it seems to need help finding it:
 set(ENV{PKG_CONFIG_PATH} "${zstd_BINARY_DIR}/lib")
-find_package(PkgConfig REQUIRED)
-pkg_search_module(ZSTD  IMPORTED_TARGET libzstd)
-message(STATUS "zstd: ${ZSTD_FOUND}")
 set (ZSTD_LIBRARY "${zstd_BINARY_DIR}/lib/libzstd.a")
 
 find_package(HDF5 REQUIRED CONFIG)
