@@ -23,8 +23,14 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 18
+      - uses: conda-incubator/setup-miniconda@v3
+        with:
+          miniconda-version: "latest"
+          activate-environment: foo
       - name: Instal pkg-config
-        run: sudo apt-get install -y pkg-config
+        run: |
+          conda install -y -c conda-forge pkg-config;
+          pkg-config --version;
       - name: Build library
         run: |
           emcc --version;
